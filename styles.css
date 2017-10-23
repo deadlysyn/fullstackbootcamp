@@ -1,0 +1,64 @@
+/* font-family */
+
+p {
+    font-family: "Arial";
+}
+
+h1 {
+    font-family: "Georgia";
+}
+
+/* font-size */
+
+/* set default font size, which is usually 16px in browsers anyway... */
+body {
+    font-size: 10px;
+}
+
+/* relative size: make span's 2x bigger than surrounding element */
+/* 50px */
+h1 {
+    font-size: 5.0em;
+}
+
+/* 20 px */
+p {
+    font-size: 2.0em;
+}
+
+/* 40px, 2*2.0em nested... */
+span {
+    font-size: 2.0em;
+}
+
+/* font-weight */
+
+p {
+    font-weight: bold;
+}
+
+/* line-height */
+
+p {
+    line-height: 1.5;
+}
+
+/* text-align */
+
+h1 {
+    text-align: right;
+}
+
+p {
+    text-align: center;
+}
+
+/* text-decoration */
+
+p {
+    text-decoration: underline;
+}
+
+h1 {
+    text-decoration: line-through;
+}
