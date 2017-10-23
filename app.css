@@ -1,0 +1,18 @@
+body {
+    background: url(http://www.woodgrain.com/images/rotation-chile.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1 {
+    color: #54206E;
+    border: 8px dashed purple;
+}
+
+h4 {
+    background: rgb(255,100,80);
+}
+
+li {
+    color: rgba(0,200,30,0.2);
+}
