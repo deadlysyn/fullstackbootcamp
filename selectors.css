@@ -28,7 +28,7 @@ p {
 
 /*Make all inputs have a 3px red border*/
 input {
-    border: 3px red solid;
+    border: 3px solid red;
 }
 
 /* Give everything with the class 'hello' a white background*/
@@ -47,7 +47,7 @@ div p {
 }
 
 /*Make only inputs with type 'text' have a gray background*/
-input:text {
+input[type="text"] {
     background: gray;
 }
 
