@@ -1,0 +1,35 @@
+body {
+    font-family: "Concert One", "sans-serif";
+}
+
+.outer {
+    border: 20px solid #CCCCCC;
+    padding: 20px;
+    max-width: 800px;
+    width: 80%;
+    margin: 20px auto;
+}
+
+.date {
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    color: #33AADD;
+}
+
+.heading {
+    text-transform: capitalize;
+    color: #111133;
+}
+
+.quote {
+    border-left: 10px solid #CCCCCC;
+    padding-left: 10px;
+}
+
+.post {
+    margin-bottom: 20px;
+}
+
+hr {
+    border-top: 3px double #CCCCCC;
+}
