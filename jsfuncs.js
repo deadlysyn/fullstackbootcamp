@@ -35,8 +35,7 @@ console.log("0: " + factorial(0));
 console.log("kebab to snake case");
 
 function kebabToSnake(s) {
-    s = s.replace(/-/g, "_");
-    return s
+    return s.replace(/-/g, "_");
 }
 
 console.log("hi-there: " + kebabToSnake("hi-there"));
