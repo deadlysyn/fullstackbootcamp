@@ -22,7 +22,7 @@ function factorial(x) {
         return 1;
     }
     for (i=1; i <= x; i++) {
-        f = f * i;
+        f *= i;
     }
     return f;
 }
