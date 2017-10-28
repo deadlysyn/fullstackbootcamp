@@ -36,12 +36,12 @@ sumArray([-5,100]);
 
 // pass in array; print largest item
 function max(a) {
-    var max = 0;
-    a.forEach(function(item){
-        if (item > max) {
-            max = item;
+    var max = a[0];
+    for (i=1; i<a.length; i++) {
+        if (a[i] > max) {
+            max = a[i];
         }
-    });
+    };
     console.log(max);
 }
 max([1,2,3]);
