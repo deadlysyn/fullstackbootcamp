@@ -15,10 +15,12 @@ while (answer != "quit") {
 }
 
 function newTodo(item) {
+    console.log("*** added item");
     todos.push(item);
 }
 
 function deleteTodo(item) {
+    console.log("*** deleted item");
     todos.splice(item, 1);
 }
 
