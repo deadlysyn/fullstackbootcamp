@@ -17,6 +17,7 @@ function listMovies(a) {
 
 listMovies(movies);
 
+// methods of objects
 var obj = {
     name: "Chuck",
     age: 45,
@@ -26,4 +27,13 @@ var obj = {
     add: function(x,y){
         return x + y;
     }
+}
+
+// this keyword
+var comments = {};
+comments.data = ["blahblah", "wahwah", "lame"];
+comments.print = function(){
+    this.data.forEach(function(x){
+        console.log(x);
+    });
 }
