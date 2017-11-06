@@ -1,35 +1,66 @@
+html {
+    height: 100%
+}
+
 body {
     background-color: #333333;
-    color: #ffffff;
-    font-family: "Play", sans-serif;
-}
-
-div {
-    border: 1px dashed #ff0000;
-}
-
-.container {
-    width: 100%;
+    font-family: "Lato", sans-serif;
     margin: 0;
-    padding: 0;
 }
 
-.boardtop {
+h1 {
+    color: #eeeeee;
+    font-size: 1em;
+    line-height: 1em;
+}
+
+#randColor {
+    font-size: 2em;
+    line-height: 1em;
+}
+
+#top {
     text-align: center;
     text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
                  0px 8px 13px rgba(0,0,0,0.1),
                  0px 18px 23px rgba(0,0,0,0.1);
     background-color: #60aadd;
-    color: #ffffff;
+    color: #eeeeee;
+    width: 100%;
     margin: 0;
-    padding: 1em;
+    padding: 0.5em;
 }
 
-.boardmiddle {
-    background-color: #ffffff;
+#menu {
+    background-color: #eeeeee;
     color: #60aadd;
-    margin: 0;
-    padding: 0;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0.5em;
+    float: left;
+}
+
+#left {
+    text-align: right;
+    width: 33%;
+    float: left;
+}
+
+#mid {
+    text-align: center;
+    width: 33%;
+    float: left;
+}
+
+#right {
+    text-align: left;
+    width: 33%;
+    float: left;
+}
+
+/*
+
+.boardmiddle {
 }
 
 .boardbottom {
@@ -40,6 +71,7 @@ div {
 
 #title {
     font-size: 1.5em;
+    line-height: 1.5em;
 }
 
 #title span {
@@ -47,77 +79,19 @@ div {
 }
 
 #easy, #hard {
-    padding: 1%;
+    padding-right: 10px;
+}
+*/
+
+#board {
+    margin: 0 auto;
+    max-width: 600px;
 }
 
-#piece {
-    width: 100px;
-    height: 100px;
-    margin: 1em;
-    padding: 1em;
-    border: 1px solid #ffffff;
-    border-radius: 15px;
-}
-
-#topl {
-    background-color: #ffffff;
-}
-
-#topm {
-    background-color: #ff0000;
-}
-
-#topr {
-    background-color: #ffff00;
-}
-
-#botl {
-    background-color: #00ffff;
-}
-
-#botm {
-    background-color: #0000ff;
-}
-
-#botr {
-    background-color: #000000;
-}
-
-#topm {
-    padding: 100px;
-    margin: 33%;
-    border: 1px solid #ffffff;
-    border-radius: 15px;
-    color: #ffffff;
-}
-
-.align-r {
-    text-align: right;
-}
-
-.align-m {
-    text-align: center;
-}
-
-.align-l {
-    text-align: left;
-}
-
-#content {
-    text-align: center;
-    padding-top: 25%;
-    text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
-                 0px 8px 13px rgba(0,0,0,0.1),
-                 0px 18px 23px rgba(0,0,0,0.1);
-}
-
-h1 {
-    font-weight: 700;
-    font-size: 5em;
-}
-
-hr {
-    width: 400px;
-    border-top: 1px solid #f8f8f8;
-    border-bottom: 1px solid rgba(0,0,0,0.2);
+.piece {
+    width: 30%;
+    padding-bottom: 30%;
+    margin: 1.66%;
+    float: left;
+    border-radius: 30px;
 }
