@@ -1,5 +1,6 @@
-// TODO: if rand color == white invert banner text color
-// TODO: if rand color == board color add border
+// TODO: if rand color == white invert #top text color
+// TODO: if rand color == boardColor add border
+// TODO: refactor to use this.style.display = "none"; (don't style unused game pieces)
 
 var boardSize = 6;
 var boardColor = "#333333";
@@ -15,16 +16,6 @@ var btnNew = document.getElementById("new");
 var btnEasy = document.getElementById("easy");
 var btnHard = document.getElementById("hard");
 var msg = document.getElementById("msg");
-
-// simulated sleep courtesy of stack overflow
-function sleep(ms) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > ms){
-      break;
-    }
-  }
-}
 
 // generate a random int between min and max
 function randInt(min, max) {
@@ -60,8 +51,6 @@ function checkGuess() {
     } else {
         msg.textContent = "Try Again";
         this.style.backgroundColor = boardColor;
-        // TODO: try refactoring to use display instead...
-        //this.style.display = "none";
     }
 }
 
