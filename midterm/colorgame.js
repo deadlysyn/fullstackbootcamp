@@ -48,14 +48,13 @@ function mkColors() {
 }
 
 function checkGuess() {
-    console.log("guess: " + this.style.backgroundColor);
-
     if (this.style.backgroundColor == randColor) {
         msg.textContent = "You Win!";
         btnNew.textContent = "PLAY AGAIN?";
         document.getElementById("top").style.backgroundColor = randColor;
-        for (i=0; i< boardSize; i++) {
+        for (i=0; i < boardSize; i++) {
             pieces[i].style.backgroundColor = randColor;
+            pieces[i].removeEventListener("click", checkGuess);
         }
     } else {
         msg.textContent = "Try Again";
