@@ -1,6 +1,7 @@
 
 // size of board
-var size = 6;
+var boardSize = 6;
+var boardColor = "#333333";
 // list of colors for game pieces
 var colors = [];
 // random color that needs guessed
@@ -34,14 +35,14 @@ function randInt(min, max) {
 
 // populate colors array with random rgbs
 function mkColors() {
-    var r, g, b;
+    // reset any existing colors
     for (i=0; i < colors.length; i++) {
-        colors[i] = "#333333";
+        colors[i] = boardColor;
     }
-    for (i=0; i < size; i++) {
-        r = randInt(0, 255);
-        g = randInt(0, 255);
-        b = randInt(0, 255);
+    for (i=0; i < boardSize; i++) {
+        var r = randInt(0, 255);
+        var g = randInt(0, 255);
+        var b = randInt(0, 255);
         colors[i] = String("rgb(" + r + ", " + g + ", " + b + ")");
     }
 }
@@ -51,35 +52,51 @@ function checkGuess() {
 
     if (this.style.backgroundColor == randColor) {
         msg.textContent = "You Win!";
+        btnNew.textContent = "PLAY AGAIN?";
         document.getElementById("top").style.backgroundColor = randColor;
-        for (i=0; i< pieces.length; i++) {
+        for (i=0; i< boardSize; i++) {
             pieces[i].style.backgroundColor = randColor;
         }
     } else {
         msg.textContent = "Try Again";
-        this.style.backgroundColor = "#333333";
+        this.style.backgroundColor = boardColor;
     }
 }
 
 // all setup required to start a new game
 function startGame() {
     // generate colors for all game pieces
-    mkColors(size);
+    mkColors(boardSize);
     // color of random piece to guess
-    randColor = colors[randInt(0, size - 1)];
+    randColor = colors[randInt(0, boardSize - 1)];
 
-    document.getElementById("randColor").textContent = randColor;
+    document.getElementById("randColor").textContent = randColor.toUpperCase();
     document.getElementById("top").style.backgroundColor = "#60aadd";
     msg.textContent = "Click colors to guess...";
+    btnNew.textContent = "NEW COLORS";
 
-    for (i=0; i < pieces.length; i++) {
+    if (boardSize == 6) {
+        document.getElementById("hard").classList.add("selected");
+        document.getElementById("easy").classList.remove("selected");
+    } else {
+        document.getElementById("easy").classList.add("selected");
+        document.getElementById("hard").classList.remove("selected");
+    }
+
+    for (i=0; i < pieces.length ; i++) {
         pieces[i].style.backgroundColor = colors[i];
-        pieces[i].addEventListener("click", checkGuess);
+        if (i < boardSize) {
+            pieces[i].addEventListener("click", checkGuess);
+        } else {
+            pieces[i].removeEventListener("click", checkGuess);
+        }
     }
 }
 
 function hover() {
-    this.classList.toggle("hover");
+    if (!this.classList.contains("selected")) {
+        this.classList.toggle("hover");
+    }
 }
 
 // main
@@ -91,15 +108,21 @@ btnNew.addEventListener("click", startGame);
 btnEasy.addEventListener("mouseover", hover);
 btnEasy.addEventListener("mouseout", hover);
 btnEasy.addEventListener("click", function() {
-    size = 3;
+    boardSize = 3;
     startGame();
 });
 
 btnHard.addEventListener("mouseover", hover);
 btnHard.addEventListener("mouseout", hover);
 btnHard.addEventListener("click", function() {
-    size = 6;
+    boardSize = 6;
     startGame();
 });
 
+// reads global boardSize so state is maintained
+// when asking for new colors...
 startGame();
+
+// TODO
+// bug: hard-easy-hard keeps easy "selected"
+// bug: click listener still attached to unused pieces in easy
