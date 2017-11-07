@@ -23,7 +23,7 @@ button {
     font-weight: 700;
     letter-spacing: 1px;
     font-size: inherit;
-    transition: all 0.4s;
+    transition: all 0.3s;
 }
 
 button:hover {
@@ -76,5 +76,5 @@ button:hover {
     margin: 1.66%;
     float: left;
     border-radius: 50%;
-    transition: all 0.4s;
+    transition: background 0.6s;
 }
