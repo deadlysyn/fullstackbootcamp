@@ -76,11 +76,11 @@ function startGame() {
     btnNew.textContent = "NEW COLORS";
 
     if (boardSize == 6) {
-        document.getElementById("hard").classList.add("selected");
-        document.getElementById("easy").classList.remove("selected");
+        btnHard.classList.add("selected");
+        btnEasy.classList.remove("selected");
     } else {
-        document.getElementById("easy").classList.add("selected");
-        document.getElementById("hard").classList.remove("selected");
+        btnEasy.classList.add("selected");
+        btnHard.classList.remove("selected");
     }
 
     for (i=0; i < pieces.length ; i++) {
@@ -125,4 +125,3 @@ startGame();
 
 // TODO
 // bug: hard-easy-hard keeps easy "selected"
-// bug: click listener still attached to unused pieces in easy
