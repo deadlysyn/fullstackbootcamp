@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    background-color: #333333;
+    background: #333333;
     font-family: "Raleway", sans-serif;
     margin: 0;
 }
@@ -11,13 +11,24 @@ body {
 h1 {
     color: #eeeeee;
     font-size: 1.3em;
+    font-weight: normal;
     line-height: 1em;
 }
 
-#randColor {
-    font-size: 2em;
-    line-height: 1em;
+button {
+    border: none;
+    background: none;
+    color: #60aadd;
+    height: 100%;
     font-weight: 700;
+    letter-spacing: 1px;
+    font-size: inherit;
+    transition: all 0.4s;
+}
+
+button:hover {
+    background: #60aadd;
+    color: #dddddd;
 }
 
 #top {
@@ -25,46 +36,33 @@ h1 {
     text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
                  0px 8px 13px rgba(0,0,0,0.1),
                  0px 18px 23px rgba(0,0,0,0.1);
-    background-color: #60aadd;
+    background: #60aadd;
     color: #eeeeee;
     width: 100%;
     margin: 0;
     padding: 0.5em;
 }
 
+#randColor {
+    font-size: 200%;
+    display: inline-block;
+}
+
 #menu {
-    background-color: #dddddd;
-    /*height: 30px;
-    text-align: center;*/
-    color: #60aadd;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0;
-    float: left;
-}
-
-#left {
-    text-align: right;
-    width: 33%;
-    font-size: 1.3em;
-    font-weight: 700;
-    float: left;
-}
-
-#mid {
-    /*border: 1px dotted red;*/
+    background: #dddddd;
+    color: #000000;
+    height: 30px;
     text-align: center;
-    width: 33%;
-    font-size: 1.3em;
-    float: left;
 }
 
-#right {
-    text-align: left;
-    width: 33%;
-    font-size: 1.3em;
-    font-weight: 700;
-    float: left;
+#msg {
+    display: inline-block;
+    width: 20%;
+}
+
+.selected {
+    background: #60aadd;
+    color: #dddddd;
 }
 
 #board {
@@ -72,15 +70,11 @@ h1 {
     max-width: 600px;
 }
 
-.hover, .selected {
-    background-color: #60aadd;
-    color: #dddddd;
-}
-
 .piece {
     width: 30%;
     padding-bottom: 30%;
     margin: 1.66%;
     float: left;
-    border-radius: 30px;
+    border-radius: 50%;
+    transition: all 0.4s;
 }

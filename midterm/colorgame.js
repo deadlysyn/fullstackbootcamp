@@ -1,5 +1,6 @@
+// TODO: if rand color == white invert banner text color
+// TODO: if rand color == board color add border
 
-// size of board
 var boardSize = 6;
 var boardColor = "#333333";
 // list of colors for game pieces
@@ -59,6 +60,8 @@ function checkGuess() {
     } else {
         msg.textContent = "Try Again";
         this.style.backgroundColor = boardColor;
+        // TODO: try refactoring to use display instead...
+        //this.style.display = "none";
     }
 }
 
@@ -92,27 +95,13 @@ function startGame() {
     }
 }
 
-function hover() {
-    if (!this.classList.contains("selected")) {
-        this.classList.toggle("hover");
-    }
-}
-
 // main
 
-btnNew.addEventListener("mouseover", hover);
-btnNew.addEventListener("mouseout", hover);
 btnNew.addEventListener("click", startGame);
-
-btnEasy.addEventListener("mouseover", hover);
-btnEasy.addEventListener("mouseout", hover);
 btnEasy.addEventListener("click", function() {
     boardSize = 3;
     startGame();
 });
-
-btnHard.addEventListener("mouseover", hover);
-btnHard.addEventListener("mouseout", hover);
 btnHard.addEventListener("click", function() {
     boardSize = 6;
     startGame();
@@ -121,6 +110,3 @@ btnHard.addEventListener("click", function() {
 // reads global boardSize so state is maintained
 // when asking for new colors...
 startGame();
-
-// TODO
-// bug: hard-easy-hard keeps easy "selected"
