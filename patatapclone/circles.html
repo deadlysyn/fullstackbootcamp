@@ -5,27 +5,16 @@
         <link rel="stylesheet" type="text/css" href="circles.css">
         <script type="text/javascript" src="lib/paper-full.js"></script>
         <script type="text/paperscript" canvas="myCanvas">
-            //var myCircle = new Path.Circle(new Point(100, 70), 10);
-            //myCircle.fillColor = 'black';
-            //var circle2 = new Path.Circle(new Point(50, 50), 300);
-            //circle2.fillColor = "purple";
-            var x = 0;
-            var y = 0;
             var colors = ['red', 'green', 'yellow', 'orange', 'purple', 'blue', 'violet'];
             function randInt(min, max) {
                 min = Math.ceil(min);
                 max = Math.floor(max);
                 return Math.floor(Math.random() * (max - min)) + min;
             }
-            for (i = 0; i <= 1000; i += 100) {
-                var circle = new Path.Circle(new Point(x, y), 20);
-                circle.fillColor = colors[randInt(0, colors.length - 1)];
-                if (x < 900) {
-                    x = i;
-                } else if (y < 1000) {
-                    i = 0;
-                    x = 0;
-                    y += 100;
+            for (var x = 0; x < 1000; x += 100) {
+                for (var y = 0; y < 1000; y += 100) {
+                    color = colors[randInt(0, colors.length - 1)];
+                    new Path.Circle(new Point(x, y), 20).fillColor = color;
                 }
             }
         </script>
