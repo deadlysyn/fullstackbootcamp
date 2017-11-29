@@ -1,0 +1,14 @@
+{
+  "name": "lecture225",
+  "version": "1.0.0",
+  "description": "Using a third-party library",
+  "main": "listProducts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mike Hoskins",
+  "license": "MIT",
+  "dependencies": {
+    "faker": "^4.1.0"
+  }
+}
