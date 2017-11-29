@@ -10,20 +10,26 @@ app.get("/", function(req, res) {
 });
 
 app.get("/speak/:animal", function(req, res) {
-    var animal = req.params.animal;
-    if (animal == "pig") {
-        res.send("The pig says OINK!");
-    } else if (animal == "cow") {
-        res.send("The cow says MOOO!");
-    } else if (animal == "dog") {
-        res.send("The dog says WOOF!");
+    var sounds = {
+        pig: "oink oink",
+        cow: "mooooooo",
+        dog: "humans give me food",
+        cat: "kill all the humans",
+        fish: "you're crazy"
+    };
+    var animal = req.params.animal.toLowerCase();
+    var sound = sounds[animal];
+
+    if (sound == undefined) {
+        res.send("I'm not sure what the " + animal + " should say?!?");
     } else {
-        res.send("I'm not sure what a " + animal + " says!?!");
+        res.send('The ' + animal + ' says "' + sound + '."');
     }
 });
 
 app.get("/repeat/:string/:number", function(req, res) {
-    var number = req.params.number;
+    var number = Number(req.params.number);
+
     if (number < 1) {
         res.send('"number" should be a positive integer');
     } else {
@@ -33,7 +39,6 @@ app.get("/repeat/:string/:number", function(req, res) {
         }
         res.send(string);
     }
-
 });
 
 app.get("*", function(req, res) {
