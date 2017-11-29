@@ -14,8 +14,8 @@ function echo(text, count) {
     }
 }
 
-echo("test 1", 3)
-echo("", 1)
-echo("test 2", 0)
-echo("test 3")
-echo()
+echo("test 1", 3);
+echo("", 1);
+echo("test 2", 0);
+echo("test 3");
+echo();
