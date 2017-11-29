@@ -2,4 +2,4 @@
 
 This directory contains node.js exercises from the Full Stack Web Development Bootcamp.
 
-To run these, you'll need [node.js installed](https://nodejs.org/en/download).  Then you can simply clone the repository, and run ```node <file>.js```.
+To run these, you'll need [node.js installed](https://nodejs.org/en/download).  Then you can simply ```git clone <this_repo```, install any dependencies via ```npm install``` (if ```package-lock.json``` is present), and finally run ```node <file>.js``` to experience the sheer awesomeness of really really simple academic exercises.  ;-)
