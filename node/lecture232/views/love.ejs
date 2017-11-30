@@ -3,10 +3,12 @@
 <title>Love Page</title>
 </head>
 <body>
-<h1>Looks like you love: <%= thing %> </h1>
+<h1>Looks like you love: <%= thing.toUpperCase() %> </h1>
 
 <% if (thing.toLowerCase() == "casey") { %>
 <p>Good choice, Casey is the BEST!</p>
+<% } else { %>
+<p>Bad choice, you should have said Casey!</p>
 <% } %>
 
 </body>
