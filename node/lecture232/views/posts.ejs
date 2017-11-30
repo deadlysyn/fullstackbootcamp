@@ -1,13 +1,7 @@
-<html>
-<head>
-<title>Loopy</title>
-<link rel="stylesheet" href="app.css">
-</head>
-<body>
+<% include partials/header %>
 <ul>
 <% posts.forEach(function(post) { %>
-<li>"<%= post.title %>" by <%= post.author %></li>
+<li>"<%= post.title %>" by <strong><%= post.author %></strong></li>
 <% }) %>
 </ul>
-<body>
-<html>
+<% include partials/footer %>

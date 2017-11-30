@@ -1,16 +1,8 @@
-<html>
-<head>
-<title>Love Page</title>
-<link rel="stylesheet" href="app.css">
-</head>
-<body>
+<% include partials/header %>
 <h1>Looks like you love: <%= thing.toUpperCase() %></h1>
-
 <% if (thing.toLowerCase() == "casey") { %>
 <p>Good choice, Casey is the BEST!</p>
 <% } else { %>
 <p>Bad choice, you should have said Casey!</p>
 <% } %>
-
-</body>
-</html>
+<% include partials/footer %>
