@@ -14,6 +14,16 @@ app.get("/love/:thing", function(req, res) {
     res.render("love.ejs", {thing: thing});
 });
 
+app.get("/posts", function(req, res) {
+    var posts = [
+        {title: "ZOMG", author: "Tom"},
+        {title: "Please tell me that's not your dog!", author: "Dick"},
+        {title: "Code smells", author: "Hariette"}
+    ];
+
+    res.render("posts.ejs", {posts: posts});
+});
+
 app.listen(8080, "127.0.0.1", function() {
     console.log("Server started...");
 });
