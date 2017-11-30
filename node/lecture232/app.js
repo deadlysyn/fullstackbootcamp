@@ -5,13 +5,18 @@
 var express = require('express');
 var app = express();
 
+// serve static content from public directory
+app.use(express.static("public"));
+// don't have to specify ".ejs" in template filenames
+app.set("view engine", "ejs");
+
 app.get("/", function(req, res) {
-    res.render("home.ejs");
+    res.render("home");
 });
 
 app.get("/love/:thing", function(req, res) {
     var thing = req.params.thing;
-    res.render("love.ejs", {thing: thing});
+    res.render("love", {thing: thing});
 });
 
 app.get("/posts", function(req, res) {
@@ -21,7 +26,7 @@ app.get("/posts", function(req, res) {
         {title: "Code smells", author: "Hariette"}
     ];
 
-    res.render("posts.ejs", {posts: posts});
+    res.render("posts", {posts: posts});
 });
 
 app.listen(8080, "127.0.0.1", function() {
