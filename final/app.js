@@ -18,9 +18,9 @@ app.get('/', function(req, res) {
 
 app.get('/campgrounds', function(req, res) {
     var campgrounds = [
-        {name: 'Foo', image: 'http://something.com/foo'},
-        {name: 'Bar', image: 'http://something.com/bar'},
-        {name: 'Baz', image: 'http://something.com/baz'}
+        {name: "Salmon Creek", image: "https://farm4.staticflickr.com/3872/14435096036_39db8f04bc.jpg"},
+        {name: "Granite Hill", image: "https://farm8.staticflickr.com/7527/15944090146_cc72295efc.jpg"},
+        {name: "Mountain Goat's Rest", image: "https://farm2.staticflickr.com/1268/4671261338_a0e9f5e219.jpg"}
     ];
 
     res.render('campgrounds', {campgrounds: campgrounds});
