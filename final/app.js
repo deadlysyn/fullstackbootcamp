@@ -68,8 +68,12 @@ app.get('/campgrounds/new', function(req, res) {
 
 // SHOW - show info about specific campground
 app.get('/campgrounds/:id', function(req, res) {
-    Campground.FindById(req.params.id, function(err, campground) {
-        res.render('show', {description: campground.description});
+    Campground.findById(req.params.id, function(err, campground) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render('show', {campground: campground});
+        }
     });
 });
 
