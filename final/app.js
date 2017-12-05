@@ -2,10 +2,13 @@
  * Final project: YelpCamp (Yelp clone for campgrounds)
  *
  * RESTful notes:
- * INDEX     /things        GET    Display list of all things
- * NEW       /things/new    GET    Display form to make new thing
- * CREATE    /things        POST   Add new thing (to DB)
- * SHOW      /things/:id    GET    Show info about one thing
+ * INDEX    /things             GET    List all things
+ * NEW      /things/new         GET    Form to make new thing
+ * CREATE   /things             POST   Add new thing (to DB), redirect
+ * SHOW     /things/:id         GET    Show info about specific thing
+ * EDIT     /things/:id/edit    GET    Show edit form for one thing
+ * UPDATE   /things/:id         PUT    Update specific thing, redirect
+ * DESTROY  /things/:id         DELETE Delete specific thing, redirect
  *
  * Routes are first-match, so order matters.
  */
