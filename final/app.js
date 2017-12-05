@@ -1,6 +1,13 @@
 /*
  * Final project: YelpCamp (Yelp clone for campgrounds)
  *
+ * RESTful notes:
+ * INDEX     /things        GET    Display list of all things
+ * NEW       /things/new    GET    Display form to make new thing
+ * CREATE    /things        POST   Add new thing (to DB)
+ * SHOW      /things/:id    GET    Show info about one thing
+ *
+ * Routes are first-match, so order matters.
  */
 
 var express     = require('express'),
@@ -17,7 +24,8 @@ mongoose.connect('mongodb://localhost/yelp_camp', {useMongoClient: true});
 // schema
 var campgroundSchema = new mongoose.Schema({
     name: String,
-    image: String
+    image: String,
+    description: String
 });
 // model
 var Campground = mongoose.model('Campground', campgroundSchema);
@@ -26,20 +34,24 @@ app.get('/', function(req, res) {
     res.render('landing');
 });
 
+// INDEX - show all campgrounds
 app.get('/campgrounds', function(req, res) {
     Campground.find({}, function(err, campgrounds){
         if (err) {
             console.log(err);
         } else {
-            res.render('campgrounds', {campgrounds: campgrounds});
+            res.render('index', {campgrounds: campgrounds});
         }
     });
 });
 
+
+// CREATE - add new campground
 app.post('/campgrounds', function(req, res) {
     Campground.create({
         name: req.body.name,
-        image: req.body.image
+        image: req.body.image,
+        description: req.body.description
     }, function(err, campground) {
         if (err) {
             console.log(err);
@@ -49,8 +61,16 @@ app.post('/campgrounds', function(req, res) {
     });
 });
 
+// NEW - show form to create campground
 app.get('/campgrounds/new', function(req, res) {
     res.render('new');
+});
+
+// SHOW - show info about specific campground
+app.get('/campgrounds/:id', function(req, res) {
+    Campground.FindById(req.params.id, function(err, campground) {
+        res.render('show', {description: campground.description});
+    });
 });
 
 app.listen(port, '127.0.0.1', function() {
