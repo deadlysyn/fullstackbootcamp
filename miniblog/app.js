@@ -27,7 +27,7 @@ app.get('/', function(req, res) {
     res.redirect('/blogs');
 });
 
-// index
+// INDEX of blog posts
 app.get('/blogs', function(req, res) {
     Blog.find({}, function(err, blogs) {
         if (err) {
@@ -38,12 +38,12 @@ app.get('/blogs', function(req, res) {
     });
 });
 
-// new form
+// NEW show create blog form
 app.get('/blogs/new', function(req, res) {
     res.render('new');
 });
 
-// create post
+// CREATE blog post
 app.post('/blogs', function(req, res) {
     Blog.create(req.body.blog, function(err, blog) {
         if (err) {
@@ -54,18 +54,18 @@ app.post('/blogs', function(req, res) {
     });
 });
 
-// show post
+// SHOW blog post
 app.get('/blogs/:id', function(req, res) {
-    Blog.findById(req.params.id, function(err, post) {
+    Blog.findById(req.params.id, function(err, blog) {
         if (err) {
             res.redirect('/blogs');
         } else {
-            res.render('show', {post: post});
+            res.render('show', {blog: blog});
         }
     });
 });
 
-// edit post
+// EDIT blog post
 app.get('/blogs/:id/edit', function(req, res) {
     Blog.findById(req.params.id, function(err, blog) {
         if (err) {
@@ -76,7 +76,7 @@ app.get('/blogs/:id/edit', function(req, res) {
     });
 });
 
-// update post
+// UPDATE blog post
 app.put('/blogs/:id', function(req, res) {
     Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, blog) {
         if (err) {
