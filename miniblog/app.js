@@ -25,6 +25,7 @@ app.get('/', function(req, res) {
     res.redirect('/blogs');
 });
 
+// index
 app.get('/blogs', function(req, res) {
     Blog.find({}, function(err, blogs) {
         if (err) {
@@ -35,16 +36,29 @@ app.get('/blogs', function(req, res) {
     });
 });
 
+// new form
 app.get('/blogs/new', function(req, res) {
     res.render('new');
 });
 
+// create post
 app.post('/blogs', function(req, res) {
     Blog.create(req.body.blog, function(err, blog) {
         if (err) {
             res.redirect('/blogs/new');
         } else {
             res.redirect('/blogs');
+        }
+    });
+});
+
+// show post
+app.get('/blogs/:id', function(req, res) {
+    Blog.findById(req.params.id, function(err, post) {
+        if (err) {
+            res.redirect('/blogs');
+        } else {
+            res.render('show', {post: post});
         }
     });
 });
