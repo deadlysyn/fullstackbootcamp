@@ -17,6 +17,20 @@ var blogSchema = new mongoose.Schema({
 });
 var Blog = mongoose.model('Blog', blogSchema);
 
+app.get('/', function(req, res) {
+    res.redirect('/blogs');
+});
+
+app.get('/blogs', function(req, res) {
+    Blog.find({}, function(err, blogs) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render('index', {blogs: blogs});
+        }
+    });
+});
+
 app.listen(port, '127.0.0.1', function() {
     console.log('Server listening...');
 });
