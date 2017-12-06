@@ -6,11 +6,13 @@ var express     = require('express'),
     app         = express(),
     port        = parseInt(process.env.PORT, 10) || 8080,
     bp          = require('body-parser'),
-    mongoose    = require('mongoose');
+    mongoose    = require('mongoose'),
+    meth        = require('method-override');
 
 app.set('view engine', 'ejs');
 app.use(bp.urlencoded({extended: true}));
 app.use(express.static('public'));
+app.use(meth('_method'));
 
 mongoose.connect('mongodb://localhost/miniblog', {useMongoClient: true});
 var blogSchema = new mongoose.Schema({
@@ -70,6 +72,17 @@ app.get('/blogs/:id/edit', function(req, res) {
             res.redirect('/blogs');
         } else {
             res.render('edit', {blog: blog});
+        }
+    });
+});
+
+// update post
+app.put('/blogs/:id', function(req, res) {
+    Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, blog) {
+        if (err) {
+            res.redirect('/blogs');
+        } else {
+            res.redirect('/blogs/' + req.params.id);
         }
     });
 });
