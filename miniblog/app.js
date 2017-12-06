@@ -87,6 +87,17 @@ app.put('/blogs/:id', function(req, res) {
     });
 });
 
+// DELETE blog post
+app.delete('/blogs/:id', function(req, res) {
+    Blog.findByIdAndRemove(req.params.id, function(err) {
+        if (err) {
+            res.redirect('/blogs');
+        } else {
+            res.redirect('/blogs');
+        }
+    });
+});
+
 app.listen(port, '127.0.0.1', function() {
     console.log('Server listening...');
 });
