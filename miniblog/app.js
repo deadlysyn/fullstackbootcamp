@@ -63,6 +63,17 @@ app.get('/blogs/:id', function(req, res) {
     });
 });
 
+// edit post
+app.get('/blogs/:id/edit', function(req, res) {
+    Blog.findById(req.params.id, function(err, blog) {
+        if (err) {
+            res.redirect('/blogs');
+        } else {
+            res.render('edit', {blog: blog});
+        }
+    });
+});
+
 app.listen(port, '127.0.0.1', function() {
     console.log('Server listening...');
 });
