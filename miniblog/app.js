@@ -7,12 +7,15 @@ var express     = require('express'),
     port        = parseInt(process.env.PORT, 10) || 8080,
     bp          = require('body-parser'),
     mongoose    = require('mongoose'),
-    meth        = require('method-override');
+    meth        = require('method-override'),
+    sanitize    = require('express-sanitizer');
 
 app.set('view engine', 'ejs');
 app.use(bp.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.use(meth('_method'));
+// must come after body-parser
+app.use(sanitize());
 
 mongoose.connect('mongodb://localhost/miniblog', {useMongoClient: true});
 var blogSchema = new mongoose.Schema({
@@ -45,6 +48,8 @@ app.get('/blogs/new', function(req, res) {
 
 // CREATE blog post
 app.post('/blogs', function(req, res) {
+    // remove script tags an other harmful content
+    req.body.blog.body = req.sanitize(req.body.blog.body);
     Blog.create(req.body.blog, function(err, blog) {
         if (err) {
             res.redirect('/blogs/new');
@@ -78,6 +83,8 @@ app.get('/blogs/:id/edit', function(req, res) {
 
 // UPDATE blog post
 app.put('/blogs/:id', function(req, res) {
+    // remove script tags an other harmful content
+    req.body.blog.body = req.sanitize(req.body.blog.body);
     Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, blog) {
         if (err) {
             res.redirect('/blogs');
