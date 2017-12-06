@@ -33,25 +33,43 @@ function findMovies(search, callback) {
     var searchURL = 'http://omdbapi.com/?apikey=thewdb&s=';
     var imdbURL = 'http://omdbapi.com/?apikey=thewdb&i=';
     var results = [];
+    //var done = false;
+    var count = -1;
 
     // TODO: working, but not sure if it's "right" or just
     // "callback hell"...
-    get(searchURL + search, function(searchBody) {
-        searchBody.Search.forEach(function(movie) {
-            get(imdbURL + movie.imdbID, function(imdbBody) {
-                results.push({
-                    title: movie.Title,
-                    year: movie.Year,
-                    genre: imdbBody.Genre,
-                    rating: imdbBody.imdbRating
+    while (true) {
+        get(searchURL + search, function(searchBody) {
+            count = searchBody.Search.length - 1;
+            searchBody.Search.forEach(function(movie) {
+                get(imdbURL + movie.imdbID, function(imdbBody) {
+                    results.push({
+                        title: movie.Title,
+                        year: movie.Year,
+                        genre: imdbBody.Genre,
+                        rating: imdbBody.imdbRating
+                    });
+                    count -= 1;
                 });
+                if (count == 0) {
+                    callback(results);
+                    break;
+                }
             });
         });
-    });
+    }
+
     // TODO: results will still be empty since the inner gets
     // are still running...
     //console.log(results);
-    callback(results);
+    //while (true) {
+    //    if (count == 0) {
+    //        callback(results);
+    //        break;
+    //    } else {
+    //        continue;
+    //    }
+    //}
 }
 
 app.get('/', function(req, res) {
