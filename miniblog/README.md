@@ -9,7 +9,7 @@ While there are a plethora of ReSTful best practices...
 
 This simple blog app was an academic exercise to implement a mostly-functional, persistent web service following this simple pattern:
 
-| Name    | Endpoint         | HTTP Verb | Description                       |
+| Action  | Endpoint Name    | HTTP Verb | Description                       |
 |---------|------------------|-----------|-----------------------------------|
 | Index   | /things          | GET       | List all things                   |
 | New     | /things/new      | GET       | Form to make new thing            |
