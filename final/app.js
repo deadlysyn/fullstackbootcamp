@@ -1,15 +1,5 @@
 /*
  * Final project: YelpCamp (Yelp clone for campgrounds)
- *
- * RESTful notes:
- * INDEX    /things             GET    List all things
- * NEW      /things/new         GET    Form to make new thing
- * CREATE   /things             POST   Add new thing (to DB), redirect
- * SHOW     /things/:id         GET    Show info about specific thing
- * EDIT     /things/:id/edit    GET    Show edit form for one thing
- * UPDATE   /things/:id         PUT    Update specific thing, redirect
- * DESTROY  /things/:id         DELETE Delete specific thing, redirect
- *
  * Routes are first-match, so order matters.
  */
 
@@ -18,20 +8,13 @@ var express     = require('express'),
     port        = parseInt(process.env.PORT, 10) || 8080,
     request     = require('request'),
     bp          = require('body-parser'),
-    mongoose    = require('mongoose');
+    mongoose    = require('mongoose'),
+    Campground  = require('./models/campground');
+
+mongoose.connect('mongodb://localhost/yelp_camp', {useMongoClient: true});
 
 app.set('view engine', 'ejs');
 app.use(bp.urlencoded({extended: true}));
-
-mongoose.connect('mongodb://localhost/yelp_camp', {useMongoClient: true});
-// schema
-var campgroundSchema = new mongoose.Schema({
-    name: String,
-    image: String,
-    description: String
-});
-// model
-var Campground = mongoose.model('Campground', campgroundSchema);
 
 app.get('/', function(req, res) {
     res.render('landing');
