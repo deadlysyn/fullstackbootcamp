@@ -86,7 +86,7 @@ app.get('/campgrounds/:id', function(req, res) {
 });
 
 // NEW - show form to create comment
-app.get('/campgrounds/:id/comments/new', function(req, res) {
+app.get('/campgrounds/:id/comments/new', isLoggedIn, function(req, res) {
     Campground.findById(req.params.id, function(err, campground) {
         if (err) {
             console.log(err);
@@ -97,7 +97,7 @@ app.get('/campgrounds/:id/comments/new', function(req, res) {
 });
 
 // CREATE - add new comment
-app.post('/campgrounds/:id/comments', function(req, res) {
+app.post('/campgrounds/:id/comments', isLoggedIn, function(req, res) {
     Campground.findById(req.params.id, function(err, campground) {
         if (err) {
             console.log(err);
@@ -143,6 +143,19 @@ app.post('/login', passport.authenticate('local', {
     failureRedirect: '/login'
 }), function(req, res) {
 });
+
+app.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/campgrounds');
+});
+
+// middleware to check if user has logged in
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/login');
+}
 
 app.listen(port, '127.0.0.1', function() {
     console.log('Server listening...');
