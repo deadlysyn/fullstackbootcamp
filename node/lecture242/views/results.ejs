@@ -1,9 +1,12 @@
 <h1>Search Results:</h1>
 
-<ul>
 <% results.forEach(function(movie) { %>
-<li><strong><%= movie.Title %></strong> (<%= movie.Year %>)</li>
+<p>
+<strong><a href="<%= movie.Image %>"><%= movie.Title %></a></strong> (<%= movie.Year %>)<br>
+Category: <%= movie.Genre %><br>
+IMDB: <%= movie.Rating %>/10
+<hr>
+</p>
 <% }); %>
-</ul>
 
 <a href="/">Search Again!</a>

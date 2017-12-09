@@ -27,63 +27,40 @@ function get(url, callback) {
     });
 }
 
-// http://omdbapi.com/?apikey=thewdb&s=<name>
-// http://omdbapi.com/?apikey=thewdb&i=<id>
-function findMovies(search, callback) {
-    var searchURL = 'http://omdbapi.com/?apikey=thewdb&s=';
+function findByName(req, res, next) {
+    var searchURL = 'http://omdbapi.com/?apikey=thewdb&s=' + req.body.search;
+
+    get(searchURL, function(results) {
+        req.movies = results.Search;
+        next();
+    });
+}
+
+function findById(req, res, next) {
     var imdbURL = 'http://omdbapi.com/?apikey=thewdb&i=';
-    var results = [];
-    //var done = false;
-    var count = -1;
+    var count = 0;
 
-    // TODO: working, but not sure if it's "right" or just
-    // "callback hell"...
-    while (true) {
-        get(searchURL + search, function(searchBody) {
-            count = searchBody.Search.length - 1;
-            searchBody.Search.forEach(function(movie) {
-                get(imdbURL + movie.imdbID, function(imdbBody) {
-                    results.push({
-                        title: movie.Title,
-                        year: movie.Year,
-                        genre: imdbBody.Genre,
-                        rating: imdbBody.imdbRating
-                    });
-                    count -= 1;
-                });
-                if (count == 0) {
-                    callback(results);
-                    break;
-                }
-            });
+    req.movies.forEach(function(movie) {
+        get(imdbURL + movie.imdbID, function(results) {
+            movie.Genre = results.Genre;
+            movie.Rating = results.imdbRating;
+            movie.Image = results.Poster;
+            req.movies[count] = movie;
+            count += 1;
+            if (count == req.movies.length - 1) {
+                next();
+            }
         });
-    }
-
-    // TODO: results will still be empty since the inner gets
-    // are still running...
-    //console.log(results);
-    //while (true) {
-    //    if (count == 0) {
-    //        callback(results);
-    //        break;
-    //    } else {
-    //        continue;
-    //    }
-    //}
+    });
 }
 
 app.get('/', function(req, res) {
     res.render('home');
 });
 
-app.post('/search', function(req, res) {
-    var search = req.body.search;
-    // TODO: tried rewriting this, get and findMovies a few ways
-    // but mostly just move the problem around...  results is
-    // empty even though we're waiting for it in a callback.
-    findMovies(search, function(results) {
-        res.render('results', {results: results});
-    });
+app.post('/search', findByName, findById, function(req, res) {
+    console.log(req.movies);
+    res.render('results', {results: req.movies});
 });
 
 app.listen(port, '127.0.0.1', function(req, res) {
