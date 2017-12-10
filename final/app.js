@@ -20,7 +20,7 @@ var indexRoutes         = require('./routes/index'),
     commentRoutes       = require('./routes/comments');
 
 mongoose.connect('mongodb://localhost/yelp_camp', {useMongoClient: true});
-seedDB();
+//seedDB();
 
 app.set('view engine', 'ejs');
 app.use(bp.urlencoded({extended: true}));
