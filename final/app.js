@@ -26,6 +26,7 @@ mongoose.connect('mongodb://localhost/yelp_camp', {useMongoClient: true});
 app.set('view engine', 'ejs');
 app.use(bp.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
+app.use(methodOverride('_method'));
 
 // passport configuration
 app.use(require('express-session')({
