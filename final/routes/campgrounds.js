@@ -18,11 +18,15 @@ router.get('/', function(req, res) {
 });
 
 // add new campground
-router.post('/', function(req, res) {
+router.post('/', isLoggedIn, function(req, res) {
     Campground.create({
         name: req.body.name,
         image: req.body.image,
-        description: req.body.description
+        description: req.body.description,
+        author: {
+            id: req.user._id,
+            username: req.user.username
+        }
     }, function(err, campground) {
         if (err) {
             console.log(err);
@@ -33,12 +37,12 @@ router.post('/', function(req, res) {
 });
 
 // show form to create campground
-router.get('/new', function(req, res) {
+router.get('/new', isLoggedIn, function(req, res) {
     res.render('campgrounds/new');
 });
 
 
-// SHOW - show info about specific campground
+// show info about specific campground
 router.get('/:id', function(req, res) {
     Campground.findById(req.params.id).populate('comments').exec(function(err, campground) {
         if (err) {
@@ -48,5 +52,13 @@ router.get('/:id', function(req, res) {
         }
     });
 });
+
+// middleware to check if user has logged in
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/login');
+}
 
 module.exports = router;
