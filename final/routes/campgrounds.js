@@ -41,7 +41,6 @@ router.get('/new', isLoggedIn, function(req, res) {
     res.render('campgrounds/new');
 });
 
-
 // show info about specific campground
 router.get('/:id', function(req, res) {
     Campground.findById(req.params.id).populate('comments').exec(function(err, campground) {
@@ -49,6 +48,39 @@ router.get('/:id', function(req, res) {
             console.log(err);
         } else {
             res.render('campgrounds/show', {campground: campground});
+        }
+    });
+});
+
+// show form to edit campground
+router.get('/:id/edit', function(req, res) {
+    Campground.findById(req.params.id, function(err, campground) {
+        if (err) {
+            res.redirect('/campgrounds');
+        } else {
+            res.render('campgrounds/edit', {campground: campground});
+        }
+    });
+});
+
+// update campground
+router.put('/:id', function(req, res) {
+    Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, campground) {
+        if (err) {
+            res.redirect('/campgrounds');
+        } else {
+            res.redirect('/campgrounds/' + req.params.id);
+        }
+    });
+});
+
+// remove campground
+router.delete('/:id', function(req, res) {
+    Campground.findByIdAndRemove(req.params.id, function(err) {
+        if (err) {
+            res.redirect('/campgrounds');
+        } else  {
+            res.redirect('/campgrounds');
         }
     });
 });
