@@ -12,6 +12,8 @@ router.get('/', function(req, res) {
     Campground.find({}, function(err, campgrounds){
         if (err) {
             console.log(err);
+            req.flash('error', 'Something went wrong, please try again...');
+            res.redirect('back');
         } else {
             res.render('campgrounds/index', {campgrounds: campgrounds});
         }
@@ -31,7 +33,10 @@ router.post('/', middleware.isLoggedIn, function(req, res) {
     }, function(err, campground) {
         if (err) {
             console.log(err);
+            req.flash('error', 'Something went wrong, please try again...');
+            res.redirect('back');
         } else {
+            req.flash('success', 'Successfully created campground!');
             res.redirect('/campgrounds');
         }
     });
@@ -47,6 +52,8 @@ router.get('/:id', function(req, res) {
     Campground.findById(req.params.id).populate('comments').exec(function(err, campground) {
         if (err) {
             console.log(err);
+            req.flash('error', 'Something went wrong, please try again...');
+            res.redirect('back');
         } else {
             res.render('campgrounds/show', {campground: campground});
         }
@@ -57,7 +64,9 @@ router.get('/:id', function(req, res) {
 router.get('/:id/edit', middleware.checkCampgroundOwnership, function(req, res) {
     Campground.findById(req.params.id, function(err, campground) {
         if (err) {
-            res.redirect('/campgrounds');
+            console.log(err);
+            req.flash('error', 'Something went wrong, please try again...');
+            res.redirect('back');
         } else {
             res.render('campgrounds/edit', {campground: campground});
         }
@@ -68,8 +77,11 @@ router.get('/:id/edit', middleware.checkCampgroundOwnership, function(req, res) 
 router.put('/:id', middleware.checkCampgroundOwnership, function(req, res) {
     Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, campground) {
         if (err) {
-            res.redirect('/campgrounds');
+            console.log(err);
+            req.flash('error', 'Something went wrong, please try again...');
+            res.redirect('back');
         } else {
+            req.flash('success', 'Successfully updated campground!');
             res.redirect('/campgrounds/' + req.params.id);
         }
     });
@@ -79,8 +91,11 @@ router.put('/:id', middleware.checkCampgroundOwnership, function(req, res) {
 router.delete('/:id', middleware.checkCampgroundOwnership, function(req, res) {
     Campground.findByIdAndRemove(req.params.id, function(err) {
         if (err) {
-            res.redirect('/campgrounds');
+            console.log(err);
+            req.flash('error', 'Something went wrong, please try again...');
+            res.redirect('back');
         } else  {
+            req.flash('success', 'Successfully deleted campground!');
             res.redirect('/campgrounds');
         }
     });

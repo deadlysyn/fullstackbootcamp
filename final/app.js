@@ -8,6 +8,7 @@ var express         = require('express'),
     request         = require('request'),
     bp              = require('body-parser'),
     mongoose        = require('mongoose'),
+    flash           = require('connect-flash'),
     passport        = require('passport'),
     methodOverride  = require('method-override'),
     LocalStrategy   = require('passport-local'),
@@ -27,6 +28,8 @@ app.set('view engine', 'ejs');
 app.use(bp.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.use(methodOverride('_method'));
+// must come before passport config
+app.use(flash());
 
 // passport configuration
 app.use(require('express-session')({
@@ -43,6 +46,8 @@ passport.deserializeUser(User.deserializeUser());
 // make user object available in all views/templates
 app.use(function(req, res, next) {
     res.locals.currentUser = req.user;
+    res.locals.error = req.flash('error');
+    res.locals.success = req.flash('success');
     next();
 });
 
