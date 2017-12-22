@@ -4,7 +4,6 @@
 
 var express         = require('express'),
     app             = express(),
-    port            = parseInt(process.env.PORT, 10) || 8080,
     request         = require('request'),
     bp              = require('body-parser'),
     mongoose        = require('mongoose'),
@@ -14,26 +13,35 @@ var express         = require('express'),
     LocalStrategy   = require('passport-local'),
     Campground      = require('./models/campground'),
     Comment         = require('./models/comment'),
-    User            = require('./models/user'),
-    seedDB          = require('./seeds');
+    User            = require('./models/user');
 
+// import route handlers
 var indexRoutes         = require('./routes/index'),
     campgroundRoutes    = require('./routes/campgrounds'),
     commentRoutes       = require('./routes/comments');
 
-mongoose.connect('mongodb://localhost/yelp_camp', {useMongoClient: true});
+// environment config
+var ip              = process.env.IP || '127.0.0.1',
+    port            = parseInt(process.env.PORT, 10) || 8080,
+    dbURL           = process.env.DBURL || 'mongodb://localhost/yelp_camp',
+    passportSecret  = process.env.SECRET || "Some random long string you'd never put in version control.";
+
+mongoose.connect(dbURL, {useMongoClient: true});
+
+// uncomment to drop and re-populate DB with test data on each run
+//var seedDB = require('./seeds');
 //seedDB();
 
 app.set('view engine', 'ejs');
 app.use(bp.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.use(methodOverride('_method'));
-// must come before passport config
+// flash messages; must come before passport config
 app.use(flash());
 
 // passport configuration
 app.use(require('express-session')({
-    secret: "Some random long string you'd never put in version control.",
+    secret: passportSecret,
     resave: false,
     saveUninitialized: false
 }));
@@ -55,6 +63,6 @@ app.use('/', indexRoutes);
 app.use('/campgrounds', campgroundRoutes);
 app.use('/campgrounds/:id/comments', commentRoutes);
 
-app.listen(port, '127.0.0.1', function() {
+app.listen(port, ip, function() {
     console.log('Server listening...');
 });
