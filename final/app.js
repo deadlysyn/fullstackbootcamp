@@ -26,6 +26,9 @@ var ip              = process.env.IP || '127.0.0.1',
     dbURL           = process.env.DBURL || 'mongodb://localhost/yelp_camp',
     passportSecret  = process.env.SECRET || "Some random long string you'd never put in version control.";
 
+console.log(' DBURL: ' + dbURL);
+console.log('SECRET: ' + passportSecret.substring(0,10) + '...');
+
 mongoose.connect(dbURL, {useMongoClient: true});
 
 // uncomment to drop and re-populate DB with test data on each run
@@ -64,5 +67,5 @@ app.use('/campgrounds', campgroundRoutes);
 app.use('/campgrounds/:id/comments', commentRoutes);
 
 app.listen(port, ip, function() {
-    console.log('Server listening...');
+    console.log('Server listening on ' + ip + ':' + port + '...');
 });
